@@ -3,7 +3,6 @@ tableData = [['apples', 'oranges', 'cherries', 'banana'],
              ['dogs', 'cats', 'moose', 'goose']]
 
 def printTable(table):
-    # create a new list of 3 "0" values: one for each list in tableData
     colWidths = [0] * len(table)
     # search for the longest element in each array of 
     for arrays in range(len(table)):
