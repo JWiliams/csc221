@@ -738,8 +738,6 @@ I press the capital O key, and now I am typing above the line.
 ---> Open up a line above this by typing O while the cursor is on this line.
 
 
-
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			Lesson 6.2: THE APPEND COMMAND
 

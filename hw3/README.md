@@ -1,4 +1,4 @@
-Part 1
+***********************************Part 1
         To begin, I ran the program lab_setup.py in the hw3 directory. 
     It created a part1 and part2 folder. In the part1 folder nearly 200 hundred files are
     filled with text and the first part of the assignment was to see which of these 200
@@ -317,7 +317,7 @@ Part 1
                  9 85566   37402
                  8 87255   76502    
 
-    In the final excercise I was to produce a list of the 10 most common number triples out of five columns in the rand-number-5.txt. I did five commands. One for each column subselections.
+    In the final excercise I was to produce a list of the 10 most common number triples out of five columns in the rand-number-5.txt. I did seven commands. One for each column subselections.
     1,2,3 - "cut -c -21 rand-numbers-5.txt | sort | uniq -c | sort -nr | head -10 > 123.txt"
     2,3,4 - "cut -c 9-29 rand-numbers-5.txt | sort | uniq -c | sort -nr | head -10 > 234.txt"
     3,4,5 - "cut -c 17- rand-numbers-5.txt | sort | uniq -c | sort -nr | head -10 > 345.txt"
