@@ -1,0 +1,155 @@
+(1)
+In [1]: import webbrowser
+
+In [2]: webbrowser.open('https://inventwithpython.com/')
+Out[2]: True
+
+Mappit:
+(2)
+import sys
+import re
+import pyperclip
+
+
+if len(sys.argv)>1:
+    #Get address from command line
+    address = ''.join(sys.argv[1:])
+else:
+    #Get address from clipboard
+    address = pyperclip.paste()
+
+webbrowser.open('https://www.google.com/maps/place/'+ address)
+
+examples:
+(3)
+In [1]: import requests
+
+In [2]: res = requests.get('https://automatetheboringstuff.com/files/rj.txt')
+
+In [3]: type(res)
+Out[3]: requests.models.Response
+
+In [5]: res.status_code==requests.codes.ok
+Out[5]: True
+
+In [6]: len(res.text)
+Out[6]: 178978
+
+In [7]: print(res.text[:250])
+The Project Gutenberg EBook of Romeo and Juliet, by William Shakespeare
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Projec
+
+(4)
+In [3]: res = requests.get('http://inventwithpython.com/page_that_does_not_exist')
+
+In [4]: res.raise_for_status()
+---------------------------------------------------------------------------
+HTTPError                                 Traceback (most recent call last)
+<ipython-input-4-cd6be6b74546> in <module>
+----> 1 res.raise_for_status()
+
+~\AppData\Roaming\Python\Python38\site-packages\requests\models.py in raise_for_status(self)
+    939
+    940         if http_error_msg:
+--> 941             raise HTTPError(http_error_msg, response=self)
+    942
+    943     def close(self):
+
+HTTPError: 404 Client Error: Not Found for url: http://inventwithpython.com/page_that_does_not_exist
+
+(5)
+In [5]: res = requests.get('http://inventwithpython.com/page_that_does_not_exist')
+
+In [6]: try:
+   ...:     res.raise_for_status()
+   ...: except Exception as exc:
+   ...:     print('There was a problem: %s'% (exc))
+   ...:
+There was a problem: 404 Client Error: Not Found for url: http://inventwithpython.com/page_that_does_not_exist
+
+(6)
+In [1]: import requests,bs4
+
+In [2]: site = requests.get('https://nostarch.com')
+
+In [3]: site.raise_for_status()
+
+In [4]: noStarchSoup = bs4.BeautifulSoup(site.text, 'html.parser')
+
+In [5]: type(noStarchSoup)
+Out[5]: bs4.BeautifulSoup
+
+In [6]: exampleFile=open('example.html')
+
+In [7]: exampleSoup = bs4.BeautifulSoup(exampleFile, 'html.parser')
+
+In [8]: type(exampleSoup)
+Out[8]: bs4.BeautifulSoup
+
+(7)
+In [1]: import bs4
+
+In [2]: exampleFile=open('example.html')
+
+In [3]: exampleSoup = bs4.BeautifulSoup(exampleFile.read(), 'html.parser')
+
+In [4]: elems = exampleSoup.select('#author')
+
+In [5]: type(elems)
+Out[5]: bs4.element.ResultSet
+
+In [6]: len(elems)
+Out[6]: 1
+
+In [8]: type(elems[0])
+Out[8]: bs4.element.Tag
+
+In [9]: str(elems[0])
+Out[9]: '<span id="author">Al Sweigart</span>'
+
+In [10]: elems[0].getText()
+Out[10]: 'Al Sweigart'
+
+In [11]: elems[0].attrs
+Out[11]: {'id': 'author'}
+
+(8)
+In [12]: pElems = exampleSoup.select('p')
+
+In [13]: str(pElems[0])c
+Out[13]: '<p>Download my <strong>Python</strong> book from <a href="https://\ninventwithpython.com">my website</a>.</p>'
+
+In [14]: pElems[0].getText()
+Out[14]: 'Download my Python book from my website.'
+
+In [15]: str(pElems[1])
+Out[15]: '<p class="slogan">Learn Python the easy way!</p>'
+
+In [16]: pElems[1].getText()
+Out[16]: 'Learn Python the easy way!'
+
+In [17]: str(pElems[2])
+Out[17]: '<p>By <span id="author">Al Sweigart</span></p>'
+
+In [18]: pElems[2].getText()
+Out[18]: 'By Al Sweigart'
+
+(9)
+In [19]: soup = bs4.BeautifulSoup(open('example.html'), 'html.parser')
+
+In [20]: spanElem = soup.select('span')[0]
+
+In [21]: str(spanElem)
+Out[21]: '<span id="author">Al Sweigart</span>'
+
+In [22]: spanElem.get('id')
+Out[22]: 'author'
+
+In [23]: spanElem.get('some_nonexisten_addr')==None
+Out[23]: True
+
+In [24]: spanElem.attrs
+Out[24]: {'id': 'author'}

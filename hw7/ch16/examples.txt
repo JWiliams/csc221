@@ -1,0 +1,155 @@
+(1)
+In [5]: exampleReader = csv.reader(exampleFile)
+
+In [6]: exampleData = list(exampleReader)
+
+In [7]: exampleData
+Out[7]:
+[['4/5/2014 13:34', 'Apples', '73'],
+ ['4/5/2014 3:41', 'Cherries', '85'],
+ ['4/6/2014 12:46', 'Pears', '14'],
+ ['4/8/2014 8:59', 'Oranges', '52'],
+ ['4/10/2014 2:07', 'Apples', '152'],
+ ['4/10/2014 18:10', 'Bananas', '23'],
+ ['4/10/2014 2:40', 'Strawberries', '98']]
+
+(2)
+In [8]: exampleData[0][1]
+Out[8]: 'Apples'
+
+In [9]: exampleData[0][0]
+Out[9]: '4/5/2014 13:34'
+
+In [10]: exampleData[0][2]
+Out[10]: '73'
+
+In [11]: exampleData[1][1]
+Out[11]: 'Cherries'
+
+In [12]: exampleData[6][1]
+Out[12]: 'Strawberries'
+
+(3)
+In [1]: import csv
+
+In [2]: exampleFile = open('example.csv')
+
+In [3]: exampleReader = csv.reader(exampleFile)
+
+In [4]: for row in exampleReader:
+   ...:     print('Row #' + str(exampleReader.line_num) + ' ' + str(row))
+   ...:
+Row #1 ['4/5/2014 13:34', 'Apples', '73']
+Row #2 ['4/5/2014 3:41', 'Cherries', '85']
+Row #3 ['4/6/2014 12:46', 'Pears', '14']
+Row #4 ['4/8/2014 8:59', 'Oranges', '52']
+Row #5 ['4/10/2014 2:07', 'Apples', '152']
+Row #6 ['4/10/2014 18:10', 'Bananas', '23']
+Row #7 ['4/10/2014 2:40', 'Strawberries', '98']
+
+(4)
+In [4]: outputWriter = csv.writer(outputFile)
+
+In [5]: outputWriter.writerow(['spam', 'eggs', 'bacon', 'ham'])
+Out[5]: 21
+
+In [6]: outputWriter.writerow(['Hello,world!', 'eggs', 'bacon', 'ham'])
+Out[6]: 31
+
+In [8]: outputWriter.writerow([1, 2, 3.141592, 4])
+Out[8]: 16
+
+In [9]: outputFile.close()
+
+(5)
+In [5]: csvFile = open('example.tsv', 'w', newline='')
+
+In [6]: csvWriter = csv.writer(csvFile, delimiter='\t', lineterminator='\n\n')
+
+In [7]: csvWriter.writerow(['apples', 'oranges', 'grapes'])
+Out[7]: 23
+
+In [10]: csvWriter.writerow(['eggs', 'bacon', 'ham'])
+Out[10]: 16
+
+In [11]: csvWriter.writerow(['spam', 'spam', 'spam', 'spam', 'spam', 'spam'])
+Out[11]: 31
+
+In [12]: csvFile.close()
+
+(6)
+In [1]: import csv
+
+In [2]: exampleFile = open('exampleWithHeader.csv')
+
+In [3]: exampleFile = open('exampleWithHeader.csv')
+
+In [5]: exampleDictReader = csv.DictReader(exampleFile)
+
+In [8]: for row in exampleDictReader:
+   ...:     print(row['Timestamp'], row['Fruit'], row['Quantity'])
+   ...:
+4/6/2014 12:46 Pears 14
+4/8/2014 8:59 Oranges 52
+4/10/2014 2:07 Apples 152
+4/10/2014 18:10 Bananas 23
+4/10/2014 2:40 Strawberries 98
+
+(7)
+In [1]: import csv
+
+In [3]: exampleFile = open('example.csv')
+
+In [4]: exampleDictReader = csv.DictReader(exampleFile, ['time', 'name', 'amount'])
+
+In [5]: for row in exampleDictReader:
+   ...:     print(row['time'], row['name'], row['amount'])
+   ...:
+4/5/2014 13:34 Apples 73
+4/5/2014 3:41 Cherries 85
+4/6/2014 12:46 Pears 14
+4/8/2014 8:59 Oranges 52
+4/10/2014 2:07 Apples 152
+4/10/2014 18:10 Bananas 23
+4/10/2014 2:40 Strawberries 98
+
+(8)
+In [1]: import csv
+
+In [2]: outputFile = open('output.csv', 'w', newline='')
+
+In [3]: outputDictWriter = csv.DictWriter(outputFile, ['Name', 'Pet', 'Phone'])
+
+In [4]: outputDictWriter.writeheader()
+Out[4]: 16
+
+In [6]: outputDictWriter.writerow({'Name': 'Alice', 'Pet': 'cat', 'Phone': '555-1234'})
+Out[6]: 20
+
+In [7]: outputDictWriter.writerow({'Name': 'Bob', 'Phone': '555-9999'})
+Out[7]: 15
+
+In [8]: outputDictWriter.writerow({'Phone': '555-5555', 'Name': 'Carol', 'Pet': 'dog'})
+Out[8]: 20
+
+In [9]: outFile.close()
+
+(9)
+In [1]: stringOfJsonData = '{"name": "Zophie", "isCat": true,"miceCAught": 0, "felineIQ": null}'
+
+In [2]: import json
+
+In [3]: jsonDataAsPythonValue = json.loads(stringOfJsonData)
+
+In [4]: jsonDataAsPythonValue
+Out[4]: {'name': 'Zophie', 'isCat': True, 'miceCAught': 0, 'felineIQ': None}
+
+(10)
+In [1]: pythonValue = {'isCat': True, 'miceCaught': 0, 'name': 'Zophie', 'felineIQ': None}
+
+In [2]: import json
+
+In [3]: stringOfJsonData = json.dumps(pythonValue)
+
+In [4]: stringOfJsonData
+Out[4]: '{"isCat": true, "miceCaught": 0, "name": "Zophie", "felineIQ": null}'
