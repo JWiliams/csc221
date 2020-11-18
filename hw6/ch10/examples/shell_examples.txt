@@ -1,0 +1,93 @@
+(1)
+In [4]: shutil.copy(p/'spam.txt',p/'some_folder')
+Out[4]: WindowsPath('C:/Users/jwjjw/some_folder')
+In [14]: shutil.copy(p/'bacon.txt', p/'temp/bacon2.txt')
+Out[14]: WindowsPath('C:/Users/jwjjw/temp/bacon2.txt')
+
+(2)
+In [17]: shutil.copytree(p/'temp', p/'temp_backup')
+Out[17]: WindowsPath('C:/Users/jwjjw/temp_backup')
+
+(3)
+In [26]: shutil.move('C:\\Users\\jwjjw\\temp\\bacon2.txt', 'C:\\Users\\jwjjw\\temp\\eggs')
+Out[26]: 'C:\\Users\\jwjjw\\temp\\eggs'
+
+(4)
+In [35]: shutil.move('spam.txt', 'c:\\does_not_exist\\eggs\\ham')
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+c:\users\jwjjw\appdata\local\programs\python\python38-32\lib\shutil.py in move(src, dst, copy_function)
+    787     try:
+--> 788         os.rename(src, real_dst)
+    789     except OSError:
+
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'spam.txt' -> 'c:\\does_not_exist\\eggs\\ham'
+
+During handling of the above exception, another exception occurred:
+...
+
+(5)
+In [39]: for filename in Path.home().glob('*.rxt'):
+    ...:     #os.unlink(file)
+    ...:     print(filename)
+    ...:
+
+In [40]: for filename in Path.home().glob('*.txt'):
+    ...:     #os.unlink(file)
+    ...:     print(filename)
+    ...:
+C:\Users\jwjjw\bacon.txt
+C:\Users\jwjjw\file.txt
+C:\Users\jwjjw\hello.txt
+
+(6)
+In [52]: for folderName, subfolders, filenames in os.walk('C:\\Users\\jwjjw\\temp'):
+    ...:     print('The current folder is ' + folderName)
+    ...:     for subfolder in subfolders:
+    ...:         print('SUBFOLDER OF ' + folderName +': '+ subfolder)
+    ...:         for filename in filenames:
+    ...:             print('FILE INSIDE '+ folderName + ': ' + filename)
+    ...:
+The current folder is C:\Users\jwjjw\temp
+SUBFOLDER OF C:\Users\jwjjw\temp: Ch7Test
+FILE INSIDE C:\Users\jwjjw\temp: Activitych9.txt
+FILE INSIDE C:\Users\jwjjw\temp: Activitych9.txtgrapes
+FILE INSIDE C:\Users\jwjjw\temp: eggs
+...
+
+(7)
+In [69]: exampleZip = zipfile.ZipFile('file.zip')
+
+In [70]: exampleZip.namelist()
+Out[70]: ['file.txt']
+
+In [73]: fileInfo=exampleZip.getinfo('file.txt')
+
+In [74]: fileInfo.file_size
+Out[74]: 0
+
+In [75]: fileInfo.compress_size
+Out[75]: 0
+# my file.txt is very small. It actually only has one word in it.
+# Which is probably why, it only shows 0 kb.
+
+(8)
+In [79]: exampleZip.extract('file.txt')
+Out[79]: 'C:\\Users\\jwjjw\\desktop\\file.txt'
+
+In [80]: exampleZip.extract('file.txt', 'C:\\Users\\jwjjw\\Desktop\\Pillow')
+Out[80]: 'C:\\Users\\jwjjw\\Desktop\\Pillow\\file.txt'
+
+(9)
+In [1]: import zipfile
+
+In [2]: newZip = zipfile.ZipFile('new.zip', 'w')
+
+In [3]: newZip.write('spam.txt', compress_type=zipfile.ZIP_DEFLATED)
+
+In [4]: newZip.close()
+
+In [5]: exit()
+
+
+

@@ -1,0 +1,416 @@
+(1)
+In [1]: from pathlib import Path
+
+In [2]: Path('spam', 'bacon', 'eggs')
+Out[2]: WindowsPath('spam/bacon/eggs')
+
+In [3]: str(Path('spam', 'bacon', 'eggs'))
+Out[3]: 'spam\\bacon\\eggs'
+
+(2)
+In [1]: from pathlib import Path
+
+In [2]: myFiles=['accounts.txt', 'details.csv', 'invite.docx']
+
+In [3]: for filename in myFiles:
+   ...:         print(Path(r'C:\Users\Al', filename))
+   ...:
+C:\Users\Al\accounts.txt
+C:\Users\Al\details.csv
+C:\Users\Al\invite.docx
+
+(3)
+In [2]: from pathlib import Path
+
+In [3]: Path('spam')/'Bacon'/'Eggs'
+Out[3]: WindowsPath('spam/Bacon/Eggs')
+
+In [4]: Path('spam')/Path('bacon/eggs')
+Out[4]: WindowsPath('spam/bacon/eggs')
+
+In [5]: Path('spam')/Path('bacon', 'eggs')
+Out[5]: WindowsPath('spam/bacon/eggs')
+
+(4)
+In [8]: 'spam' / 'bacon' / 'eggs'
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-8-192269df798b> in <module>
+----> 1 'spam' / 'bacon' / 'eggs'
+
+TypeError: unsupported operand type(s) for /: 'str' and 'str'
+
+(5)
+In [9]: from pathlib import Path
+
+In [10]: import os
+In [11]: Path.cwd()
+Out[11]: WindowsPath('C:/Users/jwjjw')
+
+In [12]: os.chdir('C:\\Windows\\System32')
+
+In [13]: Path.cwd()
+Out[13]: WindowsPath('C:/Windows/System32')
+In [14]: os.chdir('C:/ThisFolderDoesNotExist')
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+<ipython-input-14-e66a83d17b76> in <module>
+----> 1 os.chdir('C:/ThisFolderDoesNotExist')
+
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'C:/ThisFolderDoesNotExist'
+
+(6)
+In [15]: Path.home()
+Out[15]: WindowsPath('C:/Users/jwjjw')
+
+(7)
+In [17]: os.mkakedirs('C:\\delicious\\walnut\\waffles')
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-17-8b403525aaf0> in <module>
+----> 1 os.mkakedirs('C:\\delicious\\walnut\\waffles')
+
+AttributeError: module 'os' has no attribute 'mkakedirs'
+
+(8)
+In [5]: Path(r'C:\Users\jwjjw\spam').mkdir()
+
+(9)
+In [6]: Path.cwd()
+Out[6]: WindowsPath('C:/Users/jwjjw')
+
+In [7]: Path.cwd().is_absolute()
+Out[7]: True
+
+In [8]: Path('spam/bacon/eggs').is_absolute()
+Out[8]: False
+
+In [9]: Path('my/relative/path')
+Out[9]: WindowsPath('my/relative/path')
+
+In [10]: Path.cwd()/Path('my/relative/path')
+Out[10]: WindowsPath('C:/Users/jwjjw/my/relative/path')
+
+In [15]: import os
+
+In [16]: os.path.abspath('.')
+Out[16]: 'C:\\Users\\jwjjw'
+
+In [19]: os.path.abspath('.\\Scripts')
+Out[19]: 'C:\\Users\\jwjjw\\Scripts'
+
+In [20]: os.path.isabs('.')
+Out[20]: False
+
+In [21]: os.path.isabs(os.path.abspath('.'))
+Out[21]: True
+
+(10)
+In [22]: os.path.relpath('C:\\Windows', 'C:\\spam\\eggs')
+Out[22]: '..\\..\\Windows'
+
+In [23]: os.path.relpath('C:\\Windows', 'C:\\')
+Out[23]: 'Windows'
+
+(11)
+In [26]: p=Path('C:/Users/Al/spam.txt')
+
+In [27]: p.anchor
+Out[27]: 'C:\\'
+
+In [28]: p.parent
+Out[28]: WindowsPath('C:/Users/Al')
+
+In [29]: p.name
+Out[29]: 'spam.txt'
+
+In [30]: p.stem
+Out[30]: 'spam'
+
+In [31]: p.suffix
+Out[31]: '.txt'
+
+In [32]: p.drive
+Out[32]: 'C:'
+
+(12)
+In [33]: Path.cwd()
+Out[33]: WindowsPath('C:/Users/jwjjw')
+
+In [34]: Path.cwd().parents[0]
+Out[34]: WindowsPath('C:/Users')
+
+In [35]: Path.cwd().parents[1]
+Out[35]: WindowsPath('C:/')
+
+(13)
+In [37]: calcFilePath='C:\\Windows\\System32\\calc.exe'
+
+In [38]: os.path.basename(calcFilePath)
+Out[38]: 'calc.exe'
+
+In [39]: os.path.dirname(calcFilePath)
+Out[39]: 'C:\\Windows\\System32'
+
+In [41]: calcFilePath
+Out[41]: 'C:\\Windows\\System32\\calc.exe'
+
+In [42]: os.path.split(calcFilePath)
+Out[42]: ('C:\\Windows\\System32', 'calc.exe')
+
+In [43]: (os.path.dirname(calcFilePath), os.path.basename(calcFilePath))
+Out[43]: ('C:\\Windows\\System32', 'calc.exe')
+
+In [44]: calcFilePath.split(os.sep)
+
+Out[44]: ['C:', 'Windows', 'System32', 'calc.exe'
+
+(14)
+In [45]: os.path.getsize('.')
+Out[45]: 16384
+
+In [46]: os.listdir('.')
+Out[46]:
+['.android',
+ '.bash_history',
+ '.dotnet',
+ '.gitconfig',
+ '.idlerc',
+ '.ipython',
+ '.minttyrc',
+ '.msvscode.azuredatalake',
+ '.nuget',
+ '.pylint.d',
+ '.ssh',
+ '.swp',
+ '.templateengine',
+ '.vim',
+ '.viminfo',...
+
+(15)
+In [49]: p=Path('C:/Users/Al/Desktop')
+
+In [50]: p.glob('*')
+Out[50]: <generator object Path.glob at 0x04D92BC0>
+
+In [51]: list(p.glob('*'))
+Out[51]: []
+
+In [52]: p=Path('C:/Users/jwjjw/desktop')
+
+In [53]: list(p.glob('*'))
+Out[53]:
+[WindowsPath('C:/Users/jwjjw/desktop/.vs'),
+ WindowsPath('C:/Users/jwjjw/desktop/bulletPointAdder.py'),
+ WindowsPath('C:/Users/jwjjw/desktop/c++.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Car Capacities'),
+ WindowsPath('C:/Users/jwjjw/desktop/colorcpl.exe'),
+ WindowsPath('C:/Users/jwjjw/desktop/desktop.ini'),
+ WindowsPath('C:/Users/jwjjw/desktop/Dis1Scripture.png'),
+ WindowsPath('C:/Users/jwjjw/desktop/Disc1.txt'),
+ WindowsPath('C:/Users/jwjjw/desktop/Discord - Copy.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Discord.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/English Class.eml'),
+ WindowsPath('C:/Users/jwjjw/desktop/Google Drive.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Kindle.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Logitech Options.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Messages.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Outlook.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Password Manager.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/README.md'),
+ WindowsPath('C:/Users/jwjjw/desktop/runemacs - Shortcut (3).lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Screencastify.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/shouldBRight.png'),
+ WindowsPath('C:/Users/jwjjw/desktop/uploading to Git.url'),
+ WindowsPath('C:/Users/jwjjw/desktop/Wallpaper Engine.url'),
+ WindowsPath('C:/Users/jwjjw/desktop/Word.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Zoom.lnk')]
+
+In [54]: p.glob('*')
+Out[54]: <generator object Path.glob at 0x005BC6B8>
+
+In [55]: list(p.glob('*.txt'))
+Out[55]: [WindowsPath('C:/Users/jwjjw/desktop/Disc1.txt')]
+
+In [56]: list(p.glob('*?.txt'))
+Out[56]: [WindowsPath('C:/Users/jwjjw/desktop/Disc1.txt')]
+
+In [57]: list(p.glob('*.?n?'))
+Out[57]:
+[WindowsPath('C:/Users/jwjjw/desktop/c++.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/desktop.ini'),
+ WindowsPath('C:/Users/jwjjw/desktop/Dis1Scripture.png'),
+ WindowsPath('C:/Users/jwjjw/desktop/Discord - Copy.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Discord.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Google Drive.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Kindle.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Logitech Options.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Messages.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Outlook.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Password Manager.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/runemacs - Shortcut (3).lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Screencastify.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/shouldBRight.png'),
+ WindowsPath('C:/Users/jwjjw/desktop/Word.lnk'),
+ WindowsPath('C:/Users/jwjjw/desktop/Zoom.lnk')]
+
+In [58]: p=Path('C:/Users/jwjjw/desktop')
+
+In [59]: for textFilePathObj in p.glob('*.txt'):
+    ...:     print(textFilePathObj)
+    ...:
+C:\Users\jwjjw\desktop\Disc1.txt
+
+(16)
+In [70]: p=Path('spam.txt')
+
+In [71]: p.write_text('Hello, world!')
+Out[71]: 13
+
+In [72]: print(spam.txt)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-72-fe9ce38e1a6a> in <module>
+----> 1 print(spam.txt)
+
+NameError: name 'spam' is not defined
+
+In [73]: cat spam.txt
+  File "<ipython-input-73-09a84d84224c>", line 1
+    cat spam.txt
+        ^
+SyntaxError: invalid syntax
+
+
+In [74]: p.read_text()
+Out[74]: 'Hello, world!'
+
+(17)
+In [2]: from pathlib import Path
+
+In [3]: helloFile=open(Path.home()/'hello.txt')
+
+In [4]: helloFile=open('C:\\Users\\jwjjw\\hello.txt')
+
+(18)
+In [8]: sonnetFile=open(Path.home()/'sonnet29.txt')
+
+In [9]: sonnetFile.readlines()
+Out[9]:
+["When, in disgrace with fortune and men's eyes,\n",
+ 'I all alone beweep my outcast state,\n',
+ 'And trouble deaf heaven with my bootless cries,\n',
+ 'And look upon myself and curse my fate,\n']
+
+(19)
+In [10]: baconFile=open('bacon.txt','w')
+
+In [11]: baconFile.write('Hello, world!\n')
+Out[11]: 14
+
+In [12]: baconFile.close()
+
+In [13]: baconFile=open('bacon.txt', 'a')
+
+In [14]: baconFile.write('Bacon is not a vegetable.')
+Out[14]: 25
+
+In [15]: baconFile.close()
+
+In [16]: baconFile-open('bacon.txt')
+
+(20)
+In [13]: baconFile=open('bacon.txt', 'a')
+
+In [14]: baconFile.write('Bacon is not a vegetable.')
+Out[14]: 25
+
+In [15]: baconFile.close()
+
+In [16]: baconFile-open('bacon.txt')
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-16-ec3ef2fe291e> in <module>
+----> 1 baconFile-open('bacon.txt')
+
+TypeError: unsupported operand type(s) for -: '_io.TextIOWrapper' and '_io.TextIOWrapper'
+
+In [17]: baconFile=open('bacon.txt')
+
+In [18]: content=baconFile.read()
+
+In [19]: baconFile.close()
+
+In [20]: content
+Out[20]: 'Hello, world!\nBacon is not a vegetable.'
+
+In [21]: print(content)
+Hello, world!
+Bacon is not a vegetable.
+
+(21)
+In [23]: import shelve
+
+In [24]: shelfFile=shelve.open('mydata')
+
+In [25]: cats=['Zophie', 'Pooka', 'Simon']
+
+In [26]: shelfFile['cats']=cats
+
+In [27]: shelfFile.close()
+
+In [28]: shelfFile=shelve.open('mydata')
+
+In [29]: shelfFile=shelve.open('mydata')
+
+In [30]: type(shelfFile)
+Out[30]: shelve.DbfilenameShelf
+
+In [31]: shelfFile['cats']
+Out[31]: ['Zophie', 'Pooka', 'Simon']
+
+In [32]: shelfFile.close()
+
+In [33]: shelfFile=shelve.open('mydata')
+
+In [35]: list(shelfFile.keys())
+Out[35]: ['cats']
+
+In [36]: list(shelfFile.values())
+Out[36]: [['Zophie', 'Pooka', 'Simon']]
+
+In [37]: shelfFile.close()
+
+(22)
+In [1]: import pprint
+
+In [2]: cats=[{'name': 'Zophie', 'disc': 'chubby'}, {'nem': 'Pooka', 'desc': 'fluffy'}]
+
+In [3]: pprint.pformat(cats)
+Out[3]: "[{'disc': 'chubby', 'name': 'Zophie'}, {'desc': 'fluffy', 'nem': 'Pooka'}]"
+
+In [4]: fileObj = open('myCats.py', 'w')
+
+In [5]: fileObj.write('cats=' + pprint.pformat(cats) +'\n')
+Out[5]: 80
+
+In [6]: fileObj.close()
+
+In [7]: import myCats
+
+In [8]: myCats.cats
+Out[8]: [{'disc': 'chubby', 'name': 'Zophie'}, {'desc': 'fluffy', 'nem': 'Pooka'}]
+
+In [9]: myCats.cats[0]
+Out[9]: {'disc': 'chubby', 'name': 'Zophie'}
+
+In [10]: myCats.cat[0]['name']
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-10-61c6605e520e> in <module>
+----> 1 myCats.cat[0]['name']
+
+AttributeError: module 'myCats' has no attribute 'cat'
+
+In [11]: myCats.cats[0]['name']
+Out[11]: 'Zophie'
