@@ -1,0 +1,234 @@
+(1)
+In [1]: import pyautogui
+
+In [2]: wh = pyautogui.size()
+
+In [3]: wh
+Out[3]: Size(width=1920, height=1080)
+
+In [4]: wh[0]
+Out[4]: 1920
+
+In [5]: wh.width
+Out[5]: 1920
+
+(2)
+In [1]: import pyautogui
+
+In [9]: for i in range(10):
+   ...:     pyautogui.moveTo(100, 100, duration=0.25)
+   ...:     pyautogui.moveTo(200, 100, duration=0.25)
+   ...:     pyautogui.moveTo(200, 200, duration=0.25)
+   ...:     pyautogui.moveTo(100, 200, duration=0.25)
+   ...:
+
+(3)
+In [1]: import pyautogui
+
+In [2]: for i in range(10):
+   ...:     pyautogui.move(100, 0, duration=0.25)
+   ...:     pyautogui.move(0, 100, duration=0.25)
+   ...:     pyautogui.move(-100, 0, duration=0.25)
+   ...:     pyautogui.move(0, -100, duration=0.25)
+   ...:
+
+(4)
+In [1]: import pyautogui
+
+In [2]: pyautogui.position()
+Out[2]: Point(x=-27, y=-337)
+
+In [3]: pyautogui.position()
+Out[3]: Point(x=0, y=0)
+
+In [4]: pyautogui.position()
+Out[4]: Point(x=-1080, y=-342)
+
+In [5]: pyautogui.position()
+Out[5]: Point(x=2521, y=525)
+
+In [6]: pyautogui.position()
+Out[6]: Point(x=1919, y=-1111)
+
+In [7]: p = pyautogui.position()
+
+In [8]: p
+Out[8]: Point(x=1919, y=-1111)
+
+In [9]: p[0]
+Out[9]: 1919
+
+In [10]: p.x
+Out[10]: 1919
+
+(5)
+In [5]: import pyautogui
+
+In [6]: pyautogui.click(10, 5)
+
+(6)
+In [1]: import pyautogui
+
+In [2]: pyautogui.scroll(200)
+
+(7)
+In [1]: import pyautogui
+
+In [2]: pyautogui.mouseInfo()
+
+(8)
+In [2]: import pyautogui
+
+In [3]: im = pyautogui.screenshot()
+
+(9)
+In [5]: pyautogui.pixel(0,0)
+Out[5]: (0, 0, 0)
+
+In [6]: pyautogui.pixel(50, 200)
+Out[6]: (12, 12, 12)
+
+(10)
+In [1]: import pyautogui
+
+In [8]: pyautogui.pixel(50, 200)
+Out[8]: (12, 12, 12)
+
+In [11]: pyautogui.pixelMatchesColor(50, 200, (0, 0, 0))
+Out[11]: False
+
+In [12]: pyautogui.pixelMatchesColor(50, 200, (12, 12, 12))
+Out[12]: True
+
+(11)
+In [2]: import pyautogui
+
+In [3]: b = pyautogui.locateOnScreen('submit.png')
+
+In [4]: b
+Out[4]: Box(left=1747, top=0, width=52, height=26)
+
+In [5]: b[0]
+Out[5]: 1747
+
+In [6]: b.left
+Out[6]: 1747
+
+(12)
+In [7]: list(pyautogui.locateAllOnScreen('submit.png'))
+Out[7]: [Box(left=1747, top=0, width=52, height=26)]
+
+(13)
+In [10]: pyautogui.click((1747, 0, 52, 26))
+
+(14)
+pyautogui.click('submit.png')
+
+(15)
+In [1]: import pyautogui
+
+In [2]: fw = pyautogui.getActiveWindow()
+
+In [3]: fw
+Out[3]: Win32Window(hWnd=3476260)
+
+In [4]: str(fw)
+Out[4]: '<Win32Window left="-9", top="-9", width="1938", height="1048", title="IPython: C:Users/jwjjw">'
+
+In [5]: fw.title
+Out[5]: 'IPython: C:Users/jwjjw'
+
+In [6]: fw.size
+Out[6]: Size(width=1938, height=1048)
+
+In [7]: fw.left, fw.top, fw.right, fw.bottom
+Out[7]: (-9, -9, 1929, 1039)
+
+In [8]: fw.topleft
+Out[8]: Point(x=-9, y=-9)
+
+In [9]: fw.area
+Out[9]: 2031024
+
+In [10]: pyautogui.click(fw.left + 10, fw.top + 20)
+
+(16)
+In [1]: import pyautogui
+
+In [2]: fw = pyautogui.getActiveWindow()
+
+In [3]: fw.width
+Out[3]: 1938
+
+In [4]: fw.topleft
+Out[4]: Point(x=-9, y=-9)
+
+In [5]: fw.width = 1000
+
+In [6]: fw.topleft = (800, 400)
+
+(17)
+In [1]: import pyautogui
+
+In [3]: fw = pyautogui.getActiveWindow()
+
+In [4]: fw.isMaximized
+Out[4]: True
+
+In [5]: fw.isMinimized
+Out[5]: False
+
+In [6]: fw.isActive
+Out[6]: True
+
+In [7]: fw.maximize
+Out[7]: <bound method Win32Window.maximize of Win32Window(hWnd=3476260)>
+
+In [8]: fw.isMaximized
+Out[8]: True
+
+In [9]: fw.restore()
+
+In [10]: fw.topleft = (800, 400)
+
+In [11]: fw.minimize
+Out[11]: <bound method Win32Window.minimize of Win32Window(hWnd=3476260)>
+
+In [12]: import time
+
+In [14]: time.sleep(5); fw.activate()
+
+In [15]: fw.close()
+
+(18)
+In [7]: import pyautogui
+
+In [8]: pyautogui.click(100, 200); pyautogui.write('Hello, world!')
+
+In [9]: Hello, world!
+
+(19)
+In [1]: import pyautogui
+
+In [2]: pyautogui.sleep(3)
+
+In [3]: pyautogui.countdown(10)
+10 9 8 7 6 5 4 3 2 1
+
+In [4]: print('Starting in ', end=''); pyautogui.countdown(3)
+Starting in 3 2 1
+
+(20)
+In [1]: import pyautogui
+
+In [2]: pyautogui.alert('This is a message.', 'Important')
+Out[2]: 'OK'
+
+In [3]: pyautogui.confirm('Do you want to continue?')
+Out[3]: 'Cancel'
+
+In [4]: pyautogui.prompt("What is your cat's name?")
+Out[4]: 'Whiskers'
+
+In [5]: pyautogui.password('What is the password?')
+Out[5]: 'password1'
